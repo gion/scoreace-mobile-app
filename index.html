@@ -160,7 +160,7 @@
             <div class="ui-block-c league-rank">
                 <span class="splitter">|</span> 
                 <%=rank%> 
-                <a href="#<%=app.getNextLeagueDetailsPage().attr('id')%>" class="super-mini" data-bypass="true" style="font-size : 20px;" data-role="button" data-mini="true" data-inline="true"  data-icon="arrow-r" data-iconshadow="false" data-shadow="false" data-iconpos="right">Enter Scores</a>
+                <a href="#<%=app.getNextLeagueDetailsPage().attr('id')%>" class="super-mini" data-bypass="true" style="font-size : 20px;" data-role="button" data-mini="true" data-inline="true"  data-icon="arrow-r" data-iconshadow="false" data-shadow="false" data-iconpos="right">Enter <br class="show-only-if-screen-is-too-small"/> Scores</a>
             </div>
         </script>
 
@@ -172,9 +172,9 @@
             </div>
             <div class="league_stats overflowHidden inner-header">
                 <p class="floatLeft">
-                    Score: <span class="stats-value"><%=score%></span> <span class="splitter">|</span> Rank : <span class="stats-value"><%=rank%></span>
+                    Overall Score: <span class="stats-value"><%=score%></span> <span class="splitter">|</span> Overall Rank : <span class="stats-value"><%=rank%></span>
                 </p>
-                <a class="floatRight" href="#ranks">All ranks</a>
+                <a class="floatRight" href="#ranks?lid=<%=id%>">All ranks</a>
                 <p class="notice clear">* All scores are auto-saved as they change</p>
             </div>
             <div class="league_date_header inner-header">

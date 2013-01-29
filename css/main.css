@@ -299,8 +299,12 @@ form{
 .list-header .ui-block-a .splitter{
 	margin-left: 4px;
 }
-.list-header .splitter{
+.list-header .splitter,
+.ui-block-a .splitter{
 	display: none;
+}
+.ui-block-a{
+	border : 0!important;
 }
 
 .league-prop{
@@ -337,7 +341,7 @@ div.list-header > div > div,
 	background-image :  url('../img/time-bg-repeat.png');
 	background-repeat : repeat-x;
 
-
+	position: relative;
 	margin-top : -5px;
 }
 .game-time{
@@ -357,16 +361,19 @@ div.list-header > div > div,
 }
 
 .game-time.apply-to-all-leagues{
-	float: right;
 	background-image: url(../img/time-bg2-flipped.png);
 	background-size : 100% 100%;
-	left: 5px;
 
 	width: 40%;
 	min-width: 185px;
 	text-align: right;
 	padding-right: 7px;
 	padding-left : 0;
+
+	position : absolute;
+	left : auto;
+	right: -5px !important;
+	top: 0;
 }
 .game-time.apply-to-all-leagues label{
 	font-size: 9px!important;
@@ -459,7 +466,8 @@ div.list-header > div > div,
 }
 .league-details-wrapper .league_stats>*{
 	padding : 0;
-	margin : 16px 30px;
+	margin : 10px;
+	margin-bottom : 16px;
 }
 .league-details-wrapper .league_stats .stats-value{
 	/*color : #123481;*/
@@ -467,7 +475,7 @@ div.list-header > div > div,
 }
 
 .league-details-wrapper .league_stats .splitter{
-	margin : 0 20px;
+	/*margin : 0 20px;*/
 }
 
 
@@ -569,41 +577,74 @@ div.list-header > div > div,
 
 
 }
-#home .ui-block-full.league-name .splitter{
+#home .ui-block-full.league-name ,
+#ranks .ui-block-full.league-name {
+	width : 100%!important;
+}
+#home .ui-block-full.league-name .splitter,
+#ranks .ui-block-full.league-name .splitter{
 	display: none;
 }
-#home .ui-block-b{
-	width : 20%;
+#home .ui-block-b,
+#ranks .ui-block-b{
+	width : 26.6%;
 }
-#home .ui-block-c{
-	width : 46.6%;
+#home .ui-block-c,
+#ranks .ui-block-c{
+	width : 40%;
 	overflow : visible!important;
 }
 
-#home .ui-block-c a{
+#home .ui-block-c a,
+#ranks .ui-block-c a{
 	position: relative;
 	top: -16px;
 }
-#home .leagues li{
+#home .leagues li,
+#ranks .leagues li{
 	padding-top : 0;
 	padding-bottom : 0;
 }
-#home .leagues li > div{
+#home .leagues li > div,
+#ranks .leagues li > div{
 	font-size: 14px;
 	line-height: 36px;
 	overflow: hidden;
 	margin-top: -2px;
 	margin-bottom: -4px;
+
+	white-space: nowrap;
 }
 
-#home .leagues li.list-header{
+#home .leagues li.list-header,
+#ranks .leagues li.list-header{
 	margin : 10px 0;
 }
 
+/*#ranks .ui-block-full {
+	display: none;
+}*/
 
 p.notice{
 	margin-top: 0;
 	padding-top: 0;
 	position: relative;
 	top: -10px;
+}
+
+.show-only-if-screen-is-too-small{
+	display : none;
+}
+
+@media all and (max-width:400px){
+
+	.show-only-if-screen-is-too-small{
+		display : block;
+	}
+
+	.leagues-wrapper{
+		margin-left : 0;
+		margin-right : 0;
+	}
+
 }

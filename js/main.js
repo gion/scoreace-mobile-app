@@ -114,7 +114,7 @@
 			},*/
 				login : 'http://www.scoreace.com/services/auth/login',
 				getLeagues : 'http://www.scoreace.com/services/leagues/get-user-leagues',
-				ranks : 'http://www.scoreace.com/services/leagues/get-leagues-ranking',
+				ranks : 'http://www.scoreace.com/services/leagues/get-league-ranking/lid/<%=id%>/',
 				getLeagueDetails : 'http://www.scoreace.com/services/leagues/get-league-props/lti/',
 				getLeagueGames : 'http://www.scoreace.com/services/leagues/get-league-games/lid/<%=id%>/date_diff/<%=date_diff%>/',
 				saveGameScore : 'http://www.scoreace.com/services/post/game/',
@@ -153,7 +153,10 @@
 						'home'	: 'home',
 						'league-:leagueId' : 'getLeagueDetails',
 						'ranks' : 'ranks',
-						'league-details' : 'what'
+						'league-details' : 'what',
+						'leagueDetails' : 'leagueDetails',
+						'leagueDetails1' : 'leagueDetails',
+						'leagueDetails2' : 'leagueDetails'
 					},
 					trigger : true,
 					what : function(){
@@ -185,8 +188,12 @@
 
 					ranks : function(){
 
+						var params = app.router.getParams(location.toString());
+
 						$.mobile.loading('show');
+						app.pages.ranks.model.set('id', params.lid);
 						app.pages.ranks.model.update();
+						console.log('asdasdasdasasas');
 					},
 
 					getLeagueDetails : function(leagueId){
@@ -200,6 +207,15 @@
 							return function(){};
 
 						return function(){if(app._router[page]) app._router[page].apply(this,arguments);};
+					},
+
+					leagueDetails : function(){
+//						console.log('asd');
+						setTimeout(function(){
+							
+							$.mobile.activePage.trigger('create');
+//						$('#ranks .ui-header .home-link').attr('href', '#' + $.mobile.activePage.attr('id'));
+						}, 10);
 					}
 				};
 				//);
@@ -208,10 +224,11 @@
 
 				app.router = new $.mobile.Router({
 					//"" : route('login'),
-					'league-(\d+)' :  {events :'bc', handler : route('getLeagueDetails')},
-					"login" : {events :'bc', handler : route('login')},
-					'home'	: {events :'bc', handler : route('home')},
-					'ranks' : {events :'bc', handler : route('ranks')}
+					'league-(\d+)' :  {events :'bs', handler : route('getLeagueDetails')},
+					'#leagueDetails.*' :  {events :'bs', handler : route('leagueDetails')},
+					"login" : {events :'bs', handler : route('login')},
+					'home'	: {events :'bs', handler : route('home')},
+					'ranks' : {events :'bs', handler : route('ranks')}
 				});
 
 
@@ -286,10 +303,13 @@
 		            })
 					.trigger('mobileinit')
 
-					.on(app.clickEvent, '[data-rel="back"]', function(e){
+					.on(app.clickEvent, 'a[data-rel="back"],[data-rel="back"]', function(e){
 						e.preventDefault();
+						e.stopPropagation();
+						console.log('aaaaaaa')
 						history.back();
 					})
+						
 /*
 					.on(app.clickEvent, '#forgot_password', function(e){
 						e.preventDefault();
@@ -533,7 +553,7 @@
 										
 										a.push({
 											id : v.league_id,
-											name : v.league_name,
+											name : v.league_name || v.league_team_name,
 											score : v.score,
 											rank : v.rank_in_league,
 											league_team_id : v.league_team_id,
@@ -640,13 +660,16 @@
 
 				$.extend((app.pages.ranks = {}),{
 					_model : Backbone.Model.extend({
+						defaults : {
+							id : -1
+						},
 						initialize : function(){
 							this.leagues = new app.pages.home.leagues();
-							this.leagues.url = app.urls.ranks;
 						},
 						
 						update : function(){
 							var self = this;
+							this.leagues.url = _.template(app.urls.ranks, this.toJSON());
 							this.leagues.fetch({
 								dataType : 'jsonp',
 								success : function(){
@@ -684,7 +707,12 @@
 						},
 
 						initialize : function(){
-							this.on('change:homeUserScore change:visitorsUserScore', this.updateScore, this);
+							var self = this;
+							this.debouncedUpdateScore = _.debounce(function(){
+								self.updateScore();
+							}, 300);
+
+							this.on('change:score', this.updateScore, this);
 							//this.on('change:user_score_1 change:user_score_2', this.updateScore, this);
 
 							var viewName;
@@ -752,6 +780,8 @@
 
 							$.extend(data, {all_leagues : ~~this.get('applyToAllLeagues')});
 
+							console.log('update score',data);
+
 							this.set('currentRequest',
 								app.request({
 									data : data,
@@ -779,11 +809,9 @@
 									.toggleClass('final', !this.model.get('inPlay') && !this.model.get('editable'));
 						},
 						events : {
-							'change input.game-home-user-score' : 'changeHomeUserScore',
-							'change input.game-visitors-user-score' : 'changeVisitorsUserScore',
 							'focus input' : 'focusInput',
 							'blur input' : 'blurInput',
-							'change .apply-to-all-leagues input' : 'onApplyToAllLeaguesChange'
+							'change input' : 'onScoreChange'
 						},
 						focusInput : function(e){
 							var input = $(e.target),
@@ -817,8 +845,20 @@
 							this.model.set('user_score_2', $(e.target).val());
 							this.model.trigger('change:visitorsUserScore');
 						},
-						onApplyToAllLeaguesChange : function(e){
-							this.model.set('applyToAllLeagues', $(e.target).is(':checked'));
+						onScoreChange : function(e){
+							var teams = this.model.get('teams'),
+								applyToAllInput = this.$('.apply-to-all-leagues input'),
+								homeScore = this.$('input.game-home-user-score').val(),
+								visitorsScore = this.$('input.game-visitors-user-score').val();
+
+							this.model.set('applyToAllLeagues', applyToAllInput.is(':checked'));
+
+							teams.visitors.userscore = visitorsScore;
+							teams.home.userscore = homeScore;
+							this.model.set('teams', teams);
+							this.model.set('user_score_1', homeScore);
+							this.model.set('user_score_2', visitorsScore);
+							this.model.trigger('change:score');
 						}
 					}),
 					
@@ -883,7 +923,8 @@
 							this.on('change:info', function(){
 								var info = this.get('info');
 								if(info)
-									this.set('formattedDate', app.util.formatDate(info.timestamp));
+									//this.set('formattedDate', app.util.formatDate(info.timestamp));
+									this.set('formattedDate', info.date);
 							}, this);
 							
 
@@ -929,7 +970,7 @@
 							'vclick .league_header .arrow-left.active' : 'prevLeague'
 						},
 						render : function(changePage, rightToLeftTransition){
-
+							
 							if(changePage)
 								{
 									var nextPage = app.getNextLeagueDetailsPage();
@@ -1008,6 +1049,8 @@
 
 									// change the default transition direction back to te initial value
 									$.mobile.changePage.defaults.reverse = initialTransitionReverseDirection;
+
+									$.mobile.activePage.trigger('create');
 								}
 
 							return this.$el;
