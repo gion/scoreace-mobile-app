@@ -67,10 +67,7 @@
 					data : o.data,
 					dataType : 'jsonp',
 					type : 'POST',
-		            crossDomain: true,
-		            xhrFields: {
-			     		withCredentials: true
-				   	}
+		            crossDomain: true
 				})
 				.done(function(response){
 					
@@ -118,7 +115,8 @@
 				getLeagueGames : 'http://www.scoreace.com/services/leagues/get-league-games/lid/<%=id%>/date_diff/<%=date_diff%>/',
 				saveGameScore : 'http://www.scoreace.com/services/post/game/',
 				saveProp : 'http://www.scoreace.com/services/post/prop/',
-				ping : 'http://www.scoreace.com/api/is-logged'
+				ping : 'http://www.scoreace.com/api/is-logged',
+				forgotPass : 'http://www.scoreace.com/services/post/a866f97096bdef33fc34a5ec2fed2fe25'
 			
 			},
 
@@ -216,7 +214,7 @@
 			},
 			bindEventHandlers : function(){
 				 $(document)
-		            .on(app.clickEvent, "a:not([data-bypass])", function (evt) {
+		            .on(app.clickEvent, "a:not([data-bypass]):not(.naviation-off)", function (evt) {
 		                // Get the anchor href and protcol
 		                var href = $(this).attr("href");
 		                var protocol = this.protocol + "//";
@@ -269,7 +267,7 @@
 		                $.mobile.loader.prototype.options.theme = "a";
 		                $.mobile.loader.prototype.options.html = "";
 
-		                $.mobile.phonegapNavigationEnabled = true;
+		                $.mobile.phonegapNavigationEnabled = false;
 
 		                $.mobile.touchOverflowEnabled = true;
 
@@ -277,6 +275,7 @@
 		                $.support.cors = true;
     					$.mobile.allowCrossDomainPages = true;
 
+						$('html').removeClass('uninitialized');
 
 		            })
 					.trigger('mobileinit')
@@ -301,7 +300,7 @@
 
 		            	app.request({
 		            		method : 'login',
-		            		data : credentials	,
+		            		data : credentials,
 		            		success : function(data, fullResponse){
 		            			app.user = data;
 			            		$.mobile.loading('hide');
@@ -430,7 +429,7 @@
 								return this.$el.html(this.model.get('template')(this.model.toJSON()));
 							},
 							events : {
-								'vclick div' : 'selectLeague'
+								'vclick .super-mini' : 'selectLeague'
 							},
 							selectLeague : function(e){
 								e.preventDefault();
@@ -472,7 +471,8 @@
 											name : v.league_name,
 											score : v.score,
 											rank : v.rank_in_league,
-											league_team_id : v.league_team_id
+											league_team_id : v.league_team_id,
+											score_today : ~~v.score_today
 										});
 									});
 
@@ -601,6 +601,7 @@
 				$.extend((app.pages.leagueDetails = {}),{
 					gameModel : Backbone.Model.extend({
 						defaults : {
+							applyToAllLeagues : false,
 							teams : {
 								home : {
 									name : '',
@@ -683,6 +684,8 @@
 							if(currentRequest)
 								currentRequest.abort();
 
+							$.extend(data, {all_leagues : ~~this.get('applyToAllLeagues')});
+
 							this.set('currentRequest',
 								app.request({
 									data : data,
@@ -702,7 +705,7 @@
 						className : 'league-game',
 						render : function(){
 							return this.$el
-									.html(this.model.get('template')(this.model.toJSON()))
+									.html(this.model.get('template')($.extend(this.model.toJSON(),{cid:this.model.cid})))
 									.toggleClass('in-play', this.model.get('inPlay'))
 									.toggleClass('final', !this.model.get('inPlay') && !this.model.get('editable'));
 						},
@@ -710,7 +713,8 @@
 							'change input.game-home-user-score' : 'changeHomeUserScore',
 							'change input.game-visitors-user-score' : 'changeVisitorsUserScore',
 							'focus input' : 'focusInput',
-							'blur input' : 'blurInput'
+							'blur input' : 'blurInput',
+							'change .apply-to-all-leagues input' : 'onApplyToAllLeaguesChange'
 						},
 						focusInput : function(e){
 							var input = $(e.target),
@@ -743,6 +747,9 @@
 							this.model.set('teams', teams);
 							this.model.set('user_score_2', $(e.target).val());
 							this.model.trigger('change:visitorsUserScore');
+						},
+						onApplyToAllLeaguesChange : function(e){
+							this.model.set('applyToAllLeagues', $(e.target).is(':checked'));
 						}
 					}),
 					
@@ -970,9 +977,7 @@
 				this
 					.initPages()
 					.initRouter()
-					.bindEventHandlers()
-					.initPing();
-
+					.bindEventHandlers();
 
 
 		/*

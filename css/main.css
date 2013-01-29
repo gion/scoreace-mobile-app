@@ -14,10 +14,37 @@ img#loading{
 	display : none;
 }
 
+html.uninitialized{
+	height : 100%;
+	width : 100%;
+	opacity : 0.2;
+	background: url(images/ajax-loader.gif);
+	background-size: 46px 46px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: #fff; 
+}
+html.uninitialized body{
+	opacity: 0!important;
+}
+
 html a{
 	color : #c54d0d !important;
 }
 
+html div.ui-page{
+	-webkit-backface-visibility: visible;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.clear{
+	clear : both;
+}
 .floatLeft{
 	float : left;
 }
@@ -26,10 +53,6 @@ html a{
 }
 .overflowHidden{
 	overflow : hidden;
-}
-
-html div.ui-page{
-	-webkit-backface-visibility: visible;
 }
 
 .ui-page:not(#login){
@@ -126,7 +149,6 @@ html div.ui-page{
 
 #login_title{
 	text-align: left;
-	padding-left: 6%;
 
 /*display: inline-block;
 position: absolute;
@@ -138,6 +160,7 @@ padding-right: 15px;*/
 #login_form{
 	text-align: center;
 	position: relative;
+	margin : 15px;
 	/*padding : 0 15px;*/
 }
 #login_form .ui-corner-all{
@@ -269,7 +292,10 @@ form{
 	position: relative;
 	top : -2px;
 }
-
+.list-header .ui-block-a{
+	border : 0;
+	padding-left: 0;
+}
 .list-header .ui-block-a .splitter{
 	margin-left: 4px;
 }
@@ -310,6 +336,9 @@ div.list-header > div > div,
 	border : 0 !important;
 	background-image :  url('../img/time-bg-repeat.png');
 	background-repeat : repeat-x;
+
+
+	margin-top : -5px;
 }
 .game-time{
 	background: url('../img/time-bg2.png') no-repeat;
@@ -326,6 +355,28 @@ div.list-header > div > div,
 	position: relative;
 	top : -3px;
 }
+
+.game-time.apply-to-all-leagues{
+	float: right;
+	background-image: url(../img/time-bg2-flipped.png);
+	background-size : 100% 100%;
+	left: 3px;
+
+	width: 40%;
+	min-width: 185px;
+	text-align: right;
+	padding-right: 5px;
+	padding-left : 0;
+}
+.game-time.apply-to-all-leagues label{
+	font-size: 9px!important;
+	text-transform: uppercase;
+	cursor:pointer;
+}
+.game-time.apply-to-all-leagues.disabled label{
+	color : #ccc!important;
+}
+
 .in-play .game-time,
 .final .game-time{
 	padding-left : 30px;
@@ -506,4 +557,53 @@ div.list-header > div > div,
 .inner-header .arrow-right.active{
 	cursor : pointer;
 	opacity : 1;
+}
+
+
+.super-mini{
+	float : right;
+	line-height: 12px;
+	padding: 0!important;
+	margin: 0!important;
+	margin-top: 3px!important;
+
+
+}
+#home .ui-block-full.league-name .splitter{
+	display: none;
+}
+#home .ui-block-b{
+	width : 20%;
+}
+#home .ui-block-c{
+	width : 46.6%;
+	overflow : visible!important;
+}
+
+#home .ui-block-c a{
+	position: relative;
+	top: -16px;
+}
+#home .leagues li{
+	padding-top : 0;
+	padding-bottom : 0;
+}
+#home .leagues li > div{
+	font-size: 14px;
+	line-height: 36px;
+	overflow: hidden;
+	margin-top: -2px;
+	margin-bottom: -4px;
+}
+
+#home .leagues li.list-header{
+	margin : 10px 0;
+}
+
+
+p.notice{
+	margin-top: 0;
+	padding-top: 0;
+	position: relative;
+	top: -10px;
 }
