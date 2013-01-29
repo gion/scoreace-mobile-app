@@ -360,12 +360,12 @@ div.list-header > div > div,
 	float: right;
 	background-image: url(../img/time-bg2-flipped.png);
 	background-size : 100% 100%;
-	left: 3px;
+	left: 5px;
 
 	width: 40%;
 	min-width: 185px;
 	text-align: right;
-	padding-right: 5px;
+	padding-right: 7px;
 	padding-left : 0;
 }
 .game-time.apply-to-all-leagues label{

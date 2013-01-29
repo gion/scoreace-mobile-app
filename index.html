@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="uninitialized">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -24,16 +24,18 @@
     <body>
         <!-- LOGIN PAGE -->
         <div data-role="page" id="login">
+    
             <div data-theme="a" data-role="header">
                 <img src="img/logo.png" alt="score ace logo" class="logo">
             </div>
             <div data-role="content" class="content">
                 <div id="login_wrapper">
-                    <form action="" id="login_form"  data-ajax="false" autocomplete="off"> 
+
+                    <form action="" id="login_form"  data-ajax="false" autocomplete="off">
+                        <h4 id="login_title">
+                            Login
+                        </h4>
                         <div data-role="fieldcontain">
-							<h4 id="login_title">
-                         	   Login
-                      	  </h4>
                             <fieldset data-role="controlgroup">
                                 <input name="" data-corners="false" id="login_user" placeholder="Username" value="" type="email" />
                             </fieldset>
@@ -47,6 +49,8 @@
                     </form>
                 </div>
             </div>
+
+
             <div id="footer_forgot" data-position="fixed" class="no-style">
                 <a id="forgot_password" href="#forgot-popup" data-rel="popup" class='naviation-off'>
                     Forgot Password?

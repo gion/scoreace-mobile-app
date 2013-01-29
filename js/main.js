@@ -1054,13 +1054,13 @@
 				auto-login for testing purposes
 		*/
 			    	
-			$('#login_user').val('diana@xivic.com');
+		/*	$('#login_user').val('diana@xivic.com');
 	    	$('#login_password').val('develop');
 			$('#login_form').trigger('submit');
-		
+		*/
 
 				
-				app.navigate(window.location.hash);
+				app.navigate('login');
 
 				return this;
 			}
