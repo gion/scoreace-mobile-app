@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <title>
+        </title>
+     <!--    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> -->
+        <link rel="stylesheet" href="css/jquery.mobile-1.1.1.min.css" />
+        <link rel="stylesheet" href="css/sample-scoreace-theme.css" />
+        <link rel="stylesheet" href="css/main.css" />
+<!--        <script src="js/lib/jquery-1.8.2.min.js"></script>-->
+       <!-- <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script> -->
+        <script src="js/lib/jquery-1.7.1.min.js"></script>
+        <script src="js/lib/jquery.mobile.router.min.js"></script>
+        <script src="js/lib/underscore-min.js"></script>
+        <script src="js/lib/backbone.js"></script>
+    </head>
+    <body>
+        <!-- LOGIN PAGE -->
+        <div data-role="page" id="login">
+            <div data-theme="a" data-role="header">
+                <img src="img/logo.png" alt="score ace logo" class="logo">
+            </div>
+            <div data-role="content" class="content">
+                <div id="login_wrapper">
+                    
+                    <form action="" id="login_form"  data-ajax="false" autocomplete="off">
+                        <h4 id="login_title">
+                            Login
+                        </h4>
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup">
+                                <input name="" data-corners="false" id="login_user" placeholder="Username" value="" type="email" />
+                            </fieldset>
+                        </div>
+                        <div data-role="fieldcontain">
+                            <fieldset data-role="controlgroup">
+                                <input name="" data-corners="false" id="login_password" placeholder="Password" value="" type="password" />
+                            </fieldset>
+                        </div>
+                    <input id="login_submit" type="submit" data-inline="true" data-iconshadow="false" data-shadow="false" data-icon="arrow-r" data-iconpos="right" value="GO" data-mini="true" />
+                    </form>
+                </div>
+            </div>
+            <div id="footer_forgot" data-position="fixed" class="no-style">
+                <a id="forgot_password" target="_blank" rel="external" href="http://scoreace.project-domain.com/auth/forgot-password">
+                    Forgot Password?
+                </a>
+            </div>
+        </div>
+
+        <!-- HOME PAGE -->
+        <div data-role="page" id="home">
+            <div data-theme="a" data-role="header" data-position="fixed">
+                <h3>
+                    Home
+                </h3>
+            </div>
+            <div class="greeting">
+                Welcome, <span class="user-name"></span>
+            </div>
+            <div class="leagues-wrapper">
+                <ul data-role="list-view" class="leagues">
+                    <li class="list-header">
+                        <div class="ui-grid-b list-header">
+                            <div class="ui-block-a league-name league-prop"><span class="splitter">|</span> league</div>
+                            <div class="ui-block-b league-score league-prop"><span class="splitter">|</span> score</div>
+                            <div class="ui-block-c league-rank league-prop"><span class="splitter">|</span> rank</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="footer_home"  class="no-style">
+              <a href="#" id="enter_scores" data-bypass="true" style="font-size : 30px;" data-role="button" data-mini="true" data-inline="true"  data-icon="arrow-r" data-iconshadow="false" data-shadow="false" data-iconpos="right">Enter Scores</a> 
+            </div>
+        </div>
+
+
+         <!-- LEAGUE PAGE -->
+        <div data-role="page" id="leagueDetails1" data-url="leagueDetails"> 
+            <div data-theme="a" data-role="header" data-position="fixed">
+                <a href="#home" data-direction="reverse" class="home-link">home</a>
+                <h3>
+                    League
+                </h3>
+            </div>
+            
+            <div class="league-details-wrapper"></div>
+        </div>
+        
+        <div data-role="page" id="leagueDetails2" data-url="leagueDetails">
+            <div data-theme="a" data-role="header" data-position="fixed">
+                <a href="#home" data-direction="reverse" class="home-link">home</a>
+                <h3>
+                    League
+                </h3>
+            </div>
+            
+            <div class="league-details-wrapper"></div>
+        </div>
+
+         <!-- RANKS PAGE -->
+        <div data-role="page" id="ranks">
+            <div data-theme="a" data-role="header" data-position="fixed">
+                <a href="#home" data-direction="reverse" class="home-link">home</a>
+                <h3>
+                    Ranks
+                </h3>
+            </div>
+            <div class="leagues-wrapper">
+                <ul data-role="list-view" class="leagues">
+                    <li class="list-header">
+                        <div class="ui-grid-b list-header">
+                            <div class="ui-block-a league-name league-prop"><span class="splitter">|</span> league</div>
+                            <div class="ui-block-b league-score league-prop"><span class="splitter">|</span> score</div>
+                            <div class="ui-block-c league-rank league-prop"><span class="splitter">|</span> rank</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <script src="js/lib/jquery.mobile-1.2.0.js"></script>
+        <script src="js/main.js"></script>
+        <!--<script src="js/my.js"></script>-->
+        <script type="text/javascript">
+            $(document).ready(function(){
+                app.init();
+            });
+        </script>
+
+
+        <!-- templates -->
+        <script id="league-template" type="text/template">
+            <div class="ui-block-a league-name"><span class="splitter">|</span> <%=name%></div>
+            <div class="ui-block-b league-score"><span class="splitter">|</span> <%=score%></div>
+            <div class="ui-block-c league-rank"><span class="splitter">|</span> <%=rank%></div>
+        </script>
+
+        <script id="league-details-template" type="text/template">
+            <div class="league_header inner-header">
+                <span class="arrow-left floatLeft <% if(hasLeft){%>active<%}%>"></span> 
+                <%=name%>
+                <span class="arrow-right floatRight <% if(hasRight){%>active<%}%>"></span> 
+            </div>
+            <div class="league_stats overflowHidden inner-header">
+                <p class="floatLeft">
+                    Score: <span class="stats-value"><%=score%></span> <span class="splitter">|</span> Rank : <span class="stats-value"><%=rank%></span>
+                </p>
+                <a class="floatRight" href="#ranks">All ranks</a>
+            </div>
+            <div class="league_date_header inner-header">
+                <span  class="prevDate arrow-left floatLeft active"></span> 
+                <%=formattedDate%>
+                <span  class="nextDate arrow-right floatRight active"></span> 
+            </div>
+            <div class="league-details-games-container">
+                <ul data-role="list-view" class="games">
+                    <li class="list-header initial-header">
+                        <div class="ui-grid-b list-header">
+                            <div class="ui-block-a league-name league-prop"><span class="splitter">|</span> Team</div>
+                            <div class="ui-block-b league-score league-prop"><span class="splitter">|</span> Game Score</div>
+                            <div class="ui-block-c league-rank league-prop"><span class="splitter">|</span> Your Score</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </script>
+
+
+        <script id="league-game-template" type="text/template">
+            <div class="ui-grid-b league-game-wrapper">
+                <div class="ui-block-a game-name">
+                    <div class="game-home-name"><%=team_1_name%></div>
+                    <div class="game-visitors-name"><%=team_2_name%></div>
+                </div>
+                <div class="ui-block-b game-score">
+                    <div class="game-home-score"><%=game_score_1%></div>
+                    <div class="game-visitors-score"><%=game_score_2%></div>
+                </div>
+                <div class="ui-block-c game-user-score">
+                    <input type="number" step="1" min="0" <%if(!editable){%>disabled<%}%>  class="game-home-user-score" value="<%=user_score_1%>">
+                    <input type="number" step="1" min="0" <%if(!editable){%>disabled<%}%> class="game-visitors-user-score" value="<%=user_score_2%>">
+                </div>
+            </div>
+            <div class="game-time-wrapper ui-grid-b">
+                <div class="game-time ui-block-a"> 
+                    <span class="game-time-value"><%=start_time%></span>
+                </div>
+            </div>
+        </script>
+
+        <script id="league-prop-template" type="text/template">
+            <div class="ui-grid-b league-game-wrapper">
+                <div class="ui-block-a game-name">
+                    <div class="game-home-name"><%=props_name_1%></div>
+                    <div class="game-visitors-name"><%=props_name_2%></div>
+                </div>
+                <div class="ui-block-b game-score">
+                    <div class="game-home-score"><%=props_score_n1%></div>
+                    <div class="game-visitors-score"><%=props_score_n2%></div>
+                </div>
+                <div class="ui-block-c game-user-score">
+                    <input type="number" step="1" min="0" <%if(!editable){%>disabled<%}%>  class="game-home-user-score" value="<%=user_score_1%>">
+                    <input type="number" step="1" min="0" <%if(!editable){%>disabled<%}%> class="game-visitors-user-score" value="<%=user_score_2%>">
+                </div>
+            </div>
+            <div class="game-time-wrapper ui-grid-b">
+                <div class="game-time ui-block-a"> 
+                    <span class="game-time-value"><%=timeframe%></span>
+                </div>
+            </div>
+        </script>
+
+        <script id="league-random-prop-template" type="text/template">
+            <div class="ui-grid-b league-game-wrapper">
+                <div class="ui-block-a game-name">
+                    <div class="game-home-name"><%=props_question%></div>
+                </div>
+                <div class="ui-block-b game-score">
+                    <div class="game-home-score"><%=props_answer%></div>
+                </div>
+                <div class="ui-block-c game-user-score">
+                    <input type="number" step="1" <%if(!editable){%>disabled<%}%>  class="game-home-user-score game-home-user-score-random-prop" value="<%=prop_answer%>">
+                </div>
+            </div>
+            <div class="game-time-wrapper ui-grid-b">
+                <div class="game-time ui-block-a"> 
+                    <span class="game-time-value"><%=timeframe%></span>
+                </div>
+            </div>
+        </script>
+
+    </body>
+</html>

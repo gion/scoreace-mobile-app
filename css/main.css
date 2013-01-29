@@ -1,0 +1,509 @@
+* {
+	webkit-user-select: none; 
+	webkit-transform: translateZ(0); 
+	font-size : 12px;
+}
+
+html.not-loaded body > div{
+	display : none;
+}
+html.not-loaded body > img#loading{
+	display : block;
+}
+img#loading{
+	display : none;
+}
+
+html a{
+	color : #c54d0d !important;
+}
+
+.floatLeft{
+	float : left;
+}
+.floatRight{
+	float : right;
+}
+.overflowHidden{
+	overflow : hidden;
+}
+
+html div.ui-page{
+	-webkit-backface-visibility: visible;
+}
+
+.ui-page:not(#login){
+	-webkit-box-shadow: #AAA 0px 0px 40px inset;
+	-moz-box-shadow: #AAA 0px 0px 40px inset;
+	box-shadow: #AAA 0px 0px 40px inset;
+	background: #fff;
+}
+
+.ui-page .ui-header{
+	background-image: url("../img/header-bg.png");
+    background-repeat: repeat-x;
+/*    background-size: auto 100%;*/
+    color : #fff;
+    text-shadow : none;
+}
+
+.ui-icon{
+	background-color: transparent!important;
+}
+/*
+/Mad about you/Believe Beleft﻿ Below
+*/
+.ui-btn{
+
+	color: #fff;
+	font-weight: bold;
+	
+	border: 1px solid #e52600;
+	background: #f37607;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #ffa000 /*{a-bar-background-start}*/), to( #e74c0d /*{a-bar-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #ffa000 /*{a-bar-background-start}*/, #e74c0d /*{a-bar-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #ffa000 /*{a-bar-background-start}*/, #e74c0d /*{a-bar-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #ffa000 /*{a-bar-background-start}*/, #e74c0d /*{a-bar-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #ffa000 /*{a-bar-background-start}*/, #e74c0d /*{a-bar-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #ffa000 /*{a-bar-background-start}*/, #e74c0d /*{a-bar-background-end}*/);
+
+	-webkit-box-shadow: #ffd144 0px 0px 2px inset;
+	-moz-box-shadow: #ffd144 0px 0px 2px inset;
+	box-shadow: #ffd144 0px 0px 2px inset;
+
+}
+.ui-btn-hover-c {
+	color : #fff !important;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #e74c0d /*{a-bar-background-start}*/), to( #ffa000 /*{a-bar-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #e74c0d /*{a-bar-background-start}*/, #ffa000 /*{a-bar-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #e74c0d /*{a-bar-background-start}*/, #ffa000 /*{a-bar-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #e74c0d /*{a-bar-background-start}*/, #ffa000 /*{a-bar-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #e74c0d /*{a-bar-background-start}*/, #ffa000 /*{a-bar-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #e74c0d /*{a-bar-background-start}*/, #ffa000 /*{a-bar-background-end}*/);
+
+}
+.ui-btn-text{
+	color : #fff;
+}
+
+.ui-page .ui-header .home-link{
+  	background-color: transparent;
+    background-image: url("../img/back-btn-bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    border: 0 none !important;
+    border-radius: 0 0 0 0;
+    box-shadow: none !important;
+    bottom : 7px!important;
+    height : 33px !important;
+    margin-top: 2px;
+}
+.ui-page .ui-header .home-link span{
+	 border: 0 none !important;
+}
+.ui-page .ui-header .home-link span.ui-btn-text{
+	position: static;
+	margin-bottom : -2px;
+	margin-left : 1px;
+}
+
+#login .ui-header{
+	background: none;
+	border: 0;
+	text-align : center;
+}
+
+#login .ui-header img.logo{
+	width : auto;
+	height : 100px;
+	margin-top : 30px;
+}
+
+
+
+
+
+
+#login_title{
+	text-align: left;
+	padding-left: 6%;
+
+/*display: inline-block;
+position: absolute;
+top: -20px;
+left: 20px;
+background-color: #F1F1F1;
+padding-right: 15px;*/
+}
+#login_form{
+	text-align: center;
+	position: relative;
+	/*padding : 0 15px;*/
+}
+#login_form .ui-corner-all{
+	-webkit-border-radius : 0;
+	-moz-border-radius : 0;
+	border-radius : 0;
+}
+#login_form input{
+	display: inline-block;
+    width: 90%;
+    height: 40px;
+}
+#login_wrapper{
+	width : 100%;
+	position : absolute;
+	top : 50%;
+	left : 0;
+	
+	-webkit-transform : translate(0,-50%);
+	-moz-transform : translate(0,-50%);
+	-o-transform : translate(0,-50%);
+	-ms-transform : translate(0,-50%);
+	transform : translate(0,-50%);
+
+	margin-top : -20px;
+}
+
+#footer_forgot{
+	text-align : center;
+	margin:10px;
+}
+#forgot_password{
+	text-decoration: none;
+}
+
+#homepage .ui-content{
+	padding : 0!important;
+}
+
+
+
+
+.leagues-wrapper{
+    padding : 10px;
+	background: #eaeaea;
+	-webkit-border-radius : 5px;
+	-moz-border-radius : 5px;
+	border-radius : 5px;
+	margin : 20px;
+}
+.greeting{
+	margin : 20px;
+}
+.list-header{
+    font-weight: bold;
+}
+#leagues{
+    margin : 0;
+    padding : 0;
+}
+ul{
+	margin : 0;
+	padding : 0;
+}
+li{
+    list-style: none;
+    background: #FFFFFF;
+    margin: 3px 0;
+    padding: 5px;
+}
+li.league-game{
+	margin: 0;
+    padding: 5px 0 0 0;
+    background : rgba(0,0,0,0);
+}
+li.list-header{
+	background : none;
+}
+li.list-header > div {
+	background : none;
+}
+li.list-header > div > div{
+	border-left : 1px solid #333;
+	line-height: 10px;
+	padding : 5px;
+}
+
+.league-game-wrapper{
+    background: #FFFFFF;
+    padding: 5px;
+	overflow : hidden;
+
+
+/*	-moz-box-shadow : 2px 1px 3px 0 #999999;
+	-webkit-box-shadow : 2px 1px 3px 0 #999999;
+	box-shadow : 2px 1px 3px 0 #999999;*/
+}
+/*li:hover, li:active{
+	background : #ccc;
+}*/
+/*
+.league-prop:before{
+    content : "|";
+}*/
+
+
+#footer_home{
+	text-align: center;
+}
+
+#footer_home a{
+	margin-bottom : 20px;
+}
+
+
+form{
+    left : 0;
+}
+
+.user-name{
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+/*.list-header .splitter{
+	top : 0;
+}*/
+.splitter{
+	position: relative;
+	top : -2px;
+}
+
+.list-header .ui-block-a .splitter{
+	margin-left: 4px;
+}
+.list-header .splitter{
+	display: none;
+}
+
+.league-prop{
+	text-transform: capitalize;
+	padding: 8px 5px;
+}
+/*
+.game-score, .game-user-score{*/
+div.list-header > div > div,
+/*ul.games > li > div,*/
+.league-game-wrapper > div {
+	border-left: 1px solid #333;
+	padding-left: 5px;
+}
+.game-user-score:after{
+	content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.game-user-score input{
+	display : block;
+	padding : 5px;
+	border : 1px solid #cdcdcd;
+	color : #000;
+	background : #eaeaea;
+	text-align : center;
+	margin : 0;
+}
+.game-time-wrapper{
+	width : 100%;
+	border : 0 !important;
+	background-image :  url('../img/time-bg-repeat.png');
+	background-repeat : repeat-x;
+}
+.game-time{
+	background: url('../img/time-bg2.png') no-repeat;
+	background-size: 130px 30px;
+	height: 30px;
+	margin-top: 3px;
+	padding: 3px 0px 0px 30px;
+	position: relative;
+	left: -3px;
+	font-size: 10px;
+	min-width: 130px;
+}
+.game-time-value{
+	position: relative;
+	top : -3px;
+}
+.in-play .game-time,
+.final .game-time{
+	padding-left : 30px;
+	text-transform: uppercase;
+}
+.in-play .game-user-score input {
+	color : #fff;
+	border: 1px solid #e52600;
+	background: #fc9a02;
+}
+
+.game-user-score input.game-home-user-score{
+	/*border-bottom : 0;*/
+	border-radius : 10px 10px 0 0;
+	width : 96%;
+}
+.game-user-score input.game-home-user-score-random-prop{
+	/*border-bottom : 0;*/
+	border-radius : 10px;
+	width : 96%;
+}
+.game-user-score input.game-visitors-user-score{
+	border-top : 0;
+	border-radius : 0 0 10px 10px;
+	width : 96%;
+}
+
+
+.game-name{
+	font-weight : bold;
+	white-space : no-wrap;
+}
+
+.game-name .focused,
+.game-score .focused{
+	color : #FC9A02;
+}
+.game-user-score .focused{
+	border: 1px solid #FC9A02;
+}
+
+
+
+
+
+
+
+
+/*
+.league-details-wrapper{*/
+
+.inner-header{
+	background : #e6e6e6;
+
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #eaeaea /*{a-bar-background-start}*/), to( #e9e9e9 /*{a-bar-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #eaeaea /*{a-bar-background-start}*/, #e9e9e9 /*{a-bar-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #eaeaea /*{a-bar-background-start}*/, #e9e9e9 /*{a-bar-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #eaeaea /*{a-bar-background-start}*/, #e9e9e9 /*{a-bar-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #eaeaea /*{a-bar-background-start}*/, #e9e9e9 /*{a-bar-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #eaeaea /*{a-bar-background-start}*/, #e9e9e9 /*{a-bar-background-end}*/);
+
+
+	border : 1px solid #989898;
+	border-left : 0;
+	border-right : 0;
+
+	height : 52px;
+}
+.league_header, .league_date_header{
+	line-height: 52px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	text-transform: capitalize;
+}
+
+.league_date_header{
+	background : rgba(0,0,0,0);
+	border-bottom : 0;
+}
+.league-details-wrapper .league_stats>*{
+	padding : 0;
+	margin : 16px 30px;
+}
+.league-details-wrapper .league_stats .stats-value{
+	/*color : #123481;*/
+	color : #204088;
+}
+
+.league-details-wrapper .league_stats .splitter{
+	margin : 0 20px;
+}
+
+
+.league-details-games-container{
+/*	padding : 10px;
+	margin : 20px;*/
+	padding: 10px 5px;
+	margin: 10px;
+
+	background: #EAEAEA;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-ms-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.games li{
+	line-height: 29px;
+	overflow : hidden;
+	position : relative;
+}
+
+.games li.prop-header{
+	margin-top: 30px;
+	background : none;
+	line-height: auto;
+}
+/*
+.games li.prop .game-score,
+.games li.prop .league-score{
+	visibility: hidden;
+}
+
+.games li.prop.inPlay .game-score,
+.games li.prop.inPlay .league-score,
+.games li.prop.final .game-score,
+.games li.prop.final .league-score{
+	visibility: visible;
+}
+*/
+.arrow-left{
+	/*background-image : url('../img/arrow-left.png');
+	background-repeat: no-repeat;
+    background-position: 50% 50%;
+    */
+	padding: 0;
+	width: 0;
+	height: 0;
+	border-top: 18px solid transparent;
+	border-bottom: 18px solid transparent;
+	border-right: 30px solid gray;
+	width: 0 !important;
+	height: 0 !important;
+	margin-top: 10px;
+	margin-left : 10px;
+
+
+}
+
+.arrow-right{
+/*	background-image : url('../img/arrow-right.png');
+	background-repeat: no-repeat;
+    background-position: 50% 50%;*/
+
+    padding: 0;
+	width: 0;
+	height: 0;
+	border-top: 18px solid transparent;
+	border-bottom: 18px solid transparent;
+	border-left: 30px solid gray;
+	width: 0 !important;
+	height: 0 !important;
+	margin-top: 10px;
+	margin-right : 10px;
+}
+
+.inner-header .arrow-left,
+.inner-header .arrow-right{
+	display: block;
+	width : 50px;
+	height : 50px;
+	opacity : 0.3;
+}
+
+.inner-header .arrow-left.active,
+.inner-header .arrow-right.active{
+	cursor : pointer;
+	opacity : 1;
+}
