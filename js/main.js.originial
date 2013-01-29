@@ -4,7 +4,7 @@
 		$.extend(app, {
 
 			config : {
-				pingInterval : 1000 * 30 * 30
+				pingInterval : 1000 * 30 * 10
 			},
 
 
@@ -27,12 +27,7 @@
 				if(navigator.notification  && navigator.notification.alert)
 					navigator.notification.alert.apply(navigator.notification, arguments);
 				else
-					{
-						var args = arguments;
-					//	setTimeout(function(){
-							alert.apply(global, args);
-					//	}, 20);
-					}
+					console.log.apply(console, arguments);
 				return this;
 			},
 
@@ -43,6 +38,7 @@
 
 				// else
 				$.mobile.loading('hide');
+				app.alert(response.text);
 
 				if(response.redirect && response.redirect.toLowerCase() == 'login')
             		app.navigate('login',{trigger:true,replace:false});
@@ -164,7 +160,6 @@
 							app.navigate('home');
 						else 
 							{
-
 								if(arguments[4] && arguments[4].stopPropagation)
 									arguments[4].stopPropagation();
 
@@ -282,70 +277,15 @@
 
 						$('html').removeClass('uninitialized');
 
-						
 		            })
 					.trigger('mobileinit')
 
 					.on(app.clickEvent, '[data-rel="back"]', function(e){
 						e.preventDefault();
 						history.back();
-					})
-/*
-					.on(app.clickEvent, '#forgot_password', function(e){
-						e.preventDefault();
-
-						$('#forgot-popup').popup('open', {positionTo : 'window'}).show();
-					})
-					$('#forgot-popup').find('.ui-icon-delete').on(app.clickEvent, function(e){
-						e.preventDefault();
-						$('#forgot-popup').popup('close').hide();
-					}).trigger('click');*/
-
-
-					$('#forgot-email')
-						.on('keyup change', function(){
-							try{
-								$('#forgot-pass-submit').button(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test($(this).val()) ? 'enable' : 'disable');
-							} catch(err){
-								console.warn('ha ha!', err);
-							};
-						})
-						.trigger('change');
-
-					$('#forgot-popup form').on('submit', function(e){
-						e.preventDefault();
-						e.stopPropagation();
-						e.stopImmediatePropagation();
-
-
-						$("#forgot-popup").popup("close");
-						$.mobile.loading('show');
-						
-						app.request({
-							method : 'forgotPass',
-							data : {
-								mail : $('#forgot-email').val()
-							},
-							success : function(){
-								var msg;
-								$("#forgot-popup").popup("close");
-								if(arguments[1] && arguments[1].text && arguments[1].text == 'panic')
-									msg = "This email address is not registrated. Please provide the email address which you used to register your account.";
-								else
-									msg = "Please check your email for login instructions";
-								app.alert(msg);
-							},
-							fail : function(){
-								$("#forgot-popup").popup("close");
-								console.error('forgot pass fail', arguments);
-							},
-							complete : function(){
-								$.mobile.loading('hide');
-							}
-						});
-
-						return false;
 					});
+
+
 
 		            $('#login_form').on('submit', function(e){
 		            	e.stopPropagation();
@@ -358,21 +298,16 @@
 		            		password : $('#login_password').val()
 		            	};
 
-		            	app.credentials =credentials;
-		            	console.log("credentials",app.credentials);
-
 		            	app.request({
 		            		method : 'login',
 		            		data : credentials,
 		            		success : function(data, fullResponse){
-		            			console.log('login OK', arguments);
 		            			app.user = data;
 			            		$.mobile.loading('hide');
 			            		app.initPing();
 			            		app.navigate('home',{trigger:true,replace:false});
 		            		},
 		            		fail : function(){
-		            			console.log('login fail', arguments);
 		            			// service fail
 		            			if(arguments[0] === true)
 		            				{
@@ -395,7 +330,7 @@
 
 /*		            	$.ajax({
 		            		url : app.urls.login,
-		            		dataType : 'jsonp',
+		            		dataType : 'JSON',
 		            		type : 'post',
 		            		data : credentials	            		
 			            }).done(function(response){
@@ -432,7 +367,7 @@
 			},
 			
 			navigate : function(page, options){
-				console.log('navigate', arguments);
+
 				page = page.replace(/^#+/,'');
 
 				var o = $.extend(app.navigateOptions, options),
@@ -597,11 +532,10 @@
 								this.leagues.fetch({
 									dataType : 'jsonp',
 									success : function(){
-										console.log('yeeey', arguments);
 										app.pages.home.model.view.render();
 									},
 									error : function(){
-										console.log('naspa', arguments);
+
 									}
 								});
 							}
@@ -615,6 +549,9 @@
 								//this.pageName = this.$el.attr('class').replace(/.*?\bpage_(.*?)\b.*?/,'$1');
 								this.pageName = this.$el.attr('id');
 							},
+							events : {
+								'click .leagues-wrapper>.list-header>div' : 'sortLeagues'
+							},
 							render : function(doNotChangePage){
 								if(this.pageName == 'home')
 									this.$('.greeting .user-name').text(app.user.user_first_name);
@@ -624,9 +561,6 @@
 								this.model.leagues.each(function(el, i){
 									leaguesContainer.append(el.view.render());
 								});
-
-								// refresh page
-								$.mobile.activePage.trigger('create');
 							},
 							sortLeagues : function(e){
 								this.model.leagues.sortBy($(e.target).attr('class').replace(/.*?\bleague-(.*?)\b.*?/,'$1'));
@@ -769,9 +703,6 @@
 					gameView : Backbone.View.extend({
 						tagName : "li",
 						className : 'league-game',
-						initialize : function(){
-
-						},
 						render : function(){
 							return this.$el
 									.html(this.model.get('template')($.extend(this.model.toJSON(),{cid:this.model.cid})))
@@ -1053,11 +984,11 @@
 				to be removed!!!
 				auto-login for testing purposes
 		*/
-			    	
+		/*	    	
 			$('#login_user').val('diana@xivic.com');
 	    	$('#login_password').val('develop');
 			$('#login_form').trigger('submit');
-		
+		*/
 
 				
 				app.navigate(window.location.hash);
