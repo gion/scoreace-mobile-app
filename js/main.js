@@ -265,6 +265,15 @@
 		            		.find('.leagues-wrapper li:first div:first')
 		            		.trigger('click');
 		            })
+		            .on(app.clickEvent, '#backToCurrentLeague', function(e){
+		            	e.preventDefault();
+		            	e.stopPropagation();
+		            	e.stopImmediatePropagation();
+
+		            	app.pages.home.model.trigger('change:selectedLeague');
+
+		            	return false;
+		            })
 
 
 		            // prevent jqm from listening to haschange events & stuff
@@ -555,7 +564,7 @@
 											id : v.league_id,
 											name : v.league_name || v.league_team_name,
 											score : v.score,
-											rank : v.rank_in_league,
+											rank : v.rank_in_league || (k+1),
 											league_team_id : v.league_team_id,
 											score_today : ~~v.score_today
 										});

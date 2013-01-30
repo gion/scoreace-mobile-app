@@ -577,36 +577,29 @@ div.list-header > div > div,
 
 
 }
-#home .ui-block-full.league-name ,
-#ranks .ui-block-full.league-name {
+.ui-block-full.league-name {
 	width : 100%!important;
 }
-#home .ui-block-full.league-name .splitter,
-#ranks .ui-block-full.league-name .splitter{
+.ui-block-full.league-name .splitter{
 	display: none;
 }
-#home .ui-block-b,
-#ranks .ui-block-b{
+#home .ui-block-b{
 	width : 26.6%;
 }
-#home .ui-block-c,
-#ranks .ui-block-c{
+#home .ui-block-c{
 	width : 40%;
 	overflow : visible!important;
 }
 
-#home .ui-block-c a,
-#ranks .ui-block-c a{
+#home .ui-block-c a{
 	position: relative;
 	top: -16px;
 }
-#home .leagues li,
-#ranks .leagues li{
+#home .leagues li{
 	padding-top : 0;
 	padding-bottom : 0;
 }
-#home .leagues li > div,
-#ranks .leagues li > div{
+#home .leagues li > div{
 	font-size: 14px;
 	line-height: 36px;
 	overflow: hidden;
@@ -616,14 +609,13 @@ div.list-header > div > div,
 	white-space: nowrap;
 }
 
-#home .leagues li.list-header,
-#ranks .leagues li.list-header{
+#home .leagues li.list-header{
 	margin : 10px 0;
 }
 
-/*#ranks .ui-block-full {
-	display: none;
-}*/
+#ranks .league-rank a{
+	display : none;
+}
 
 p.notice{
 	margin-top: 0;
