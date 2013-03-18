@@ -156,7 +156,8 @@
 						'league-details' : 'what',
 						'leagueDetails' : 'leagueDetails',
 						'leagueDetails1' : 'leagueDetails',
-						'leagueDetails2' : 'leagueDetails'
+						'leagueDetails2' : 'leagueDetails',
+						'logout' : 'logout'
 					},
 					trigger : true,
 					what : function(){
@@ -175,6 +176,19 @@
 								app.navigate('login');
 								app.killPing();
 							}
+					},
+
+					logout : function(){
+						console.log('logout #1');
+						if(localStorage && $.isFunction(localStorage.removeItem))
+							{
+								localStorage.removeItem('scoreaceCredentials');
+							}
+
+						$('#login_form').get(0).reset();
+						app.user = null;
+						app.navigate('login');
+						console.log('logout #2');
 					},
 
 					home : function(){
@@ -394,10 +408,19 @@
 		            		method : 'login',
 		            		data : credentials,
 		            		success : function(data, fullResponse){
+
+		            			if(localStorage)
+		            				{
+		            					localStorage.setItem('scoreaceCredentials', JSON.stringify(credentials));
+		            				}
+
 		            			console.log('login OK', arguments);
 		            			app.user = data;
 			            		$.mobile.loading('hide');
 			            		app.initPing();
+			            		
+			            		app.pages.home.model.update();
+
 			            		app.navigate('home',{trigger:true,replace:false});
 		            		},
 		            		fail : function(){
@@ -644,6 +667,9 @@
 								//this.pageName = this.$el.attr('class').replace(/.*?\bpage_(.*?)\b.*?/,'$1');
 								this.pageName = this.$el.attr('id');
 							},
+							events:{
+								'click #logout-link' : 'logout'
+							},
 							render : function(doNotChangePage){
 								if(this.pageName == 'home')
 									this.$('.greeting .user-name').text(app.user.user_first_name);
@@ -659,6 +685,9 @@
 							},
 							sortLeagues : function(e){
 								this.model.leagues.sortBy($(e.target).attr('class').replace(/.*?\bleague-(.*?)\b.*?/,'$1'));
+							},
+							logout: function(){
+								app._router.logout();
 							}
 						})
 					}
@@ -1105,14 +1134,23 @@
 				to be removed!!!
 				auto-login for testing purposes
 		*/
-			    	
-		/*	$('#login_user').val('diana@xivic.com');
-	    	$('#login_password').val('develop');
-			$('#login_form').trigger('submit');
-		*/
+			    		
+				if(localStorage)
+					{
+						var credentials = localStorage.getItem('scoreaceCredentials');
+						if(credentials)
+							try{
+								credentials = JSON.parse(credentials);
 
-				
-				app.navigate('login');
+								$('#login_user').val(credentials.email);
+						    	$('#login_password').val(credentials.password);
+								$('#login_form').trigger('submit');
+							} catch(err) {
+								console.error('damn', err);
+							}
+					}
+				else
+					app.navigate('login');
 
 				return this;
 			}

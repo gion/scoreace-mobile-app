@@ -290,7 +290,7 @@ form{
 }*/
 .splitter{
 	position: relative;
-	top : -2px;
+	top : -1px;
 }
 .list-header .ui-block-a{
 	border : 0;
@@ -626,6 +626,10 @@ p.notice{
 
 .show-only-if-screen-is-too-small{
 	display : none;
+}
+
+#logout-link{
+	float : right;
 }
 
 @media all and (max-width:400px){
