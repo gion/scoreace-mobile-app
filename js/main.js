@@ -417,7 +417,7 @@
 		            			console.log('login OK', arguments);
 		            			app.user = data;
 			            		$.mobile.loading('hide');
-			            		app.initPing();
+			            		//app.initPing();
 			            		
 			            		app.pages.home.model.update();
 
