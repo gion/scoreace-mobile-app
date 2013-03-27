@@ -390,9 +390,13 @@ div.list-header > div > div,
 	text-transform: uppercase;
 }
 .in-play .game-user-score input {
-	color : #fff;
+	color : #000;
 	border: 1px solid #e52600;
+	border: 1px solid rgba(229, 38, 0, .5);
 	background: #fc9a02;
+	background: rgba(252, 154, 2, .5);
+	opacity : 1;
+	text-shadow : none;
 }
 
 .game-user-score input.game-home-user-score{
