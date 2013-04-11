@@ -589,7 +589,7 @@
 											score : v.score,
 											rank : v.rank_in_league || (k+1),
 											league_team_id : v.league_team_id,
-											score_today : v.today_score
+											score_today : v.score_today
 										});
 									});
 
