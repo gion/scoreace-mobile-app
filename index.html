@@ -11,7 +11,7 @@
          <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.1/jquery.mobile-1.1.1.min.css" /> 
     -->
         <link rel="stylesheet" href="css/jquery.mobile-1.1.1.min.css" />
-        <link rel="stylesheet" href="css/jquery.mobile.css " />
+        <link rel="stylesheet" href="css/jquery.mobile.css" />
         <link rel="stylesheet" href="css/sample-scoreace-theme.css" />
         <link rel="stylesheet" href="css/main.css" />
 <!--        <script src="js/lib/jquery-1.8.2.min.js"></script>-->
@@ -63,7 +63,7 @@
                         <div style="padding:10px 20px;">
                           <h3>Forgot password</h3>
                           <label for="un" class="ui-hidden-accessible">Email:</label>
-                          <input type="text" name="email" id="forgot-email" value="" placeholder="email" data-theme="a" value=""/>
+                          <input type="text" name="email" id="forgot-email" placeholder="email" data-theme="a" value=""/>
 
                           <input type="submit" id="forgot-pass-submit" data-theme="a" value="Submit" />
                         </div>
@@ -88,7 +88,7 @@
                     <li class="list-header">
                         <div class="ui-grid-b list-header">
                             <div class="ui-block-a league-name league-prop"><span class="splitter">|</span> Today's pts</div>
-                            <div class="ui-block-b league-score league-prop"><span class="splitter">|</span>  Overall pts</div>
+                            <div class="ui-block-b league-score league-prop"><span class="splitter">|</span> Overall pts</div>
                             <div class="ui-block-c league-rank league-prop"><span class="splitter">|</span> Rank</div>
                         </div>
                     </li>
@@ -125,7 +125,7 @@
             <div data-theme="a" data-role="header" data-position="fixed">
                 <a href="#" id="backToCurrentLeague" data-direction="reverse" class="home-link naviation-off">back</a>
                 <h3>
-                    Ranks
+                    Standings
                 </h3>
             </div>
             <div class="leagues-wrapper">
@@ -175,7 +175,7 @@
                 <p class="floatLeft">
                     Overall Score: <span class="stats-value"><%=score%></span> <span class="splitter">|</span> Overall Rank : <span class="stats-value"><%=rank%></span>
                 </p>
-                <a class="floatRight" href="#ranks?lid=<%=id%>">All ranks</a>
+                <a class="floatRight" href="#ranks?lid=<%=id%>">Standings</a>
                 <p class="notice clear">* All scores are auto-saved as they change</p>
             </div>
             <div class="league_date_header inner-header">
@@ -188,7 +188,7 @@
                     <li class="list-header initial-header">
                         <div class="ui-grid-b list-header">
                             <div class="ui-block-a league-name league-prop"><span class="splitter">|</span> Team</div>
-                            <div class="ui-block-b league-score league-prop"><span class="splitter">|</span> Game Score</div>
+                            <div class="ui-block-b league-score league-prop"><span class="splitter">|</span> Score</div>
                             <div class="ui-block-c league-rank league-prop"><span class="splitter">|</span> Your Score</div>
                         </div>
                     </li>

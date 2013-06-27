@@ -179,7 +179,7 @@
 					},
 
 					logout : function(){
-						console.log('logout #1');
+						//console.log('logout #1');
 						if(localStorage && $.isFunction(localStorage.removeItem))
 							{
 								localStorage.removeItem('scoreaceCredentials');
@@ -188,7 +188,7 @@
 						$('#login_form').get(0).reset();
 						app.user = null;
 						app.navigate('login');
-						console.log('logout #2');
+						//console.log('logout #2');
 					},
 
 					home : function(){
@@ -207,7 +207,7 @@
 						$.mobile.loading('show');
 						app.pages.ranks.model.set('id', params.lid);
 						app.pages.ranks.model.update();
-						console.log('asdasdasdasasas');
+						//console.log('asdasdasdasasas');
 					},
 
 					getLeagueDetails : function(leagueId){
@@ -224,7 +224,7 @@
 					},
 
 					leagueDetails : function(){
-//						console.log('asd');
+//						//console.log('asd');
 						setTimeout(function(){
 							
 							$.mobile.activePage.trigger('create');
@@ -329,7 +329,7 @@
 					.on(app.clickEvent, 'a[data-rel="back"],[data-rel="back"]', function(e){
 						e.preventDefault();
 						e.stopPropagation();
-						console.log('aaaaaaa')
+						//console.log('aaaaaaa')
 						history.back();
 					})
 						
@@ -350,7 +350,7 @@
 							try{
 								$('#forgot-pass-submit').button(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test($(this).val()) ? 'enable' : 'disable');
 							} catch(err){
-								console.warn('ha ha!', err);
+								//console.warn('ha ha!', err);
 							};
 						})
 						.trigger('change');
@@ -380,7 +380,7 @@
 							},
 							fail : function(){
 								$("#forgot-popup").popup("close");
-								console.error('forgot pass fail', arguments);
+								//console.error('forgot pass fail', arguments);
 							},
 							complete : function(){
 								$.mobile.loading('hide');
@@ -402,7 +402,7 @@
 		            	};
 
 		            	app.credentials =credentials;
-		            	console.log("credentials",app.credentials);
+		            	//console.log("credentials",app.credentials);
 
 		            	app.request({
 		            		method : 'login',
@@ -414,7 +414,7 @@
 		            					localStorage.setItem('scoreaceCredentials', JSON.stringify(credentials));
 		            				}
 
-		            			console.log('login OK', arguments);
+		            			//console.log('login OK', arguments);
 		            			app.user = data;
 			            		$.mobile.loading('hide');
 			            		//app.initPing();
@@ -424,7 +424,7 @@
 			            		app.navigate('home',{trigger:true,replace:false});
 		            		},
 		            		fail : function(){
-		            			console.log('login fail', arguments);
+		            			//console.log('login fail', arguments);
 		            			// service fail
 		            			if(arguments[0] === true)
 		            				{
@@ -484,7 +484,7 @@
 			},
 			
 			navigate : function(page, options){
-				console.log('navigate', arguments);
+				//console.log('navigate', arguments);
 				page = page.replace(/^#+/,'');
 
 				var o = $.extend(app.navigateOptions, options),
@@ -589,7 +589,7 @@
 											score : v.score,
 											rank : v.rank_in_league || (k+1),
 											league_team_id : v.league_team_id,
-											score_today : v.score_today
+											score_today : v.score_today +  v.status
 										});
 									});
 
@@ -649,11 +649,11 @@
 								this.leagues.fetch({
 									dataType : 'jsonp',
 									success : function(){
-										console.log('yeeey', arguments);
+										//console.log('yeeey', arguments);
 										app.pages.home.model.view.render();
 									},
 									error : function(){
-										console.log('naspa', arguments);
+										//console.log('naspa', arguments);
 									}
 								});
 							}
@@ -818,7 +818,7 @@
 
 							$.extend(data, {all_leagues : ~~this.get('applyToAllLeagues')});
 
-							console.log('update score',data);
+							//console.log('update score',data);
 
 							this.set('currentRequest',
 								app.request({
@@ -1035,8 +1035,8 @@
 												reachedProp = true;
 												tempGamesContainers.append(headerTemplate({
 													h1 : 'players',
-													h2 : 'correct answer',
-													h3 : 'your answer'
+													h2 : 'Score',
+													h3 : 'Your Score'
 												}));
 											}	
 										else if(!reachedRandomProp && el.get('isRandomProp'))
@@ -1045,8 +1045,8 @@
 												
 												tempGamesContainers.append(headerTemplate({
 													h1 : 'question',
-													h2 : 'correct answer',
-													h3 : 'your answer'
+													h2 : 'Score',
+													h3 : 'Your Score'
 												}));
 											}
 									}
