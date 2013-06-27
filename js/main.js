@@ -586,7 +586,7 @@
 										a.push({
 											id : v.league_id,
 											name : v.league_name || v.league_team_name,
-											score : v.score,
+											score : v.score || 0,
 											rank : v.rank_in_league || (k+1),
 											league_team_id : v.league_team_id,
 											score_today : v.score_today +  v.status
