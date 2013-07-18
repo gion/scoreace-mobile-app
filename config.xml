@@ -21,7 +21,7 @@
     <preference name="target-device"    value="universal" />
     <preference name="fullscreen"       value="false" />
 
-    <icon src="http://scoreace.com/SA_favicon.png" />
+    <icon src="SA_favicon.png" />
     <icon src="res/icon/android/icon-36-ldpi.png"   gap:platform="android"    gap:density="ldpi" />
     <icon src="res/icon/android/icon-48-mdpi.png"   gap:platform="android"    gap:density="mdpi" />
     <icon src="res/icon/android/icon-72-hdpi.png"   gap:platform="android"    gap:density="hdpi" />
