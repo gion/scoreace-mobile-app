@@ -3,7 +3,7 @@
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.phonegap.scoreace"
         version   = "2.0.1">
-    <name>Scoreace</name>
+    <name>Score Ace</name>
 
     <description>
         Mobile app for ScoreAce website.
