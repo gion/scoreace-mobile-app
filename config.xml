@@ -26,6 +26,7 @@
     <icon src="icons/SA_favicon.png" gap:platform="ios" width="57" height="57" />
     <icon src="icons/SA_favicon-72.png" gap:platform="ios" width="72" height="72" />
     <icon src="icons/SA_favicon_at_2x.png" gap:platform="ios" width="114" height="114" />
+    <icon src="icons/SA_favicon_72_2x.png" gap:platform="ios" width="144" height="144" />
 
     <access origin="*.scoreace.com" />
 </widget>
